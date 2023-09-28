@@ -22,6 +22,29 @@ module.exports = {
     },
   },
   plugins: ['vue', 'tailwindcss'],
+  overrides: [
+    {
+      files: ['*.ts', '*.vue'],
+      rules: {
+        'no-undef': 'off',
+      },
+    },
+    {
+      files: ['*.vue'],
+      parser: 'vue-eslint-parser',
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        extraFileExtensions: ['.vue'],
+        ecmaVersion: 'latest',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      rules: {
+        'no-undef': 'off',
+      },
+    },
+  ],
   rules: {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
