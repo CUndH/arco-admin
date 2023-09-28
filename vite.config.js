@@ -9,17 +9,6 @@ export default ({ mode }) => {
 
   return defineConfig({
     base: process.env.VITE_BASE_PUBLIC_PATH,
-    css: {
-      preprocessorOptions: {
-        less: {
-          modifyVars: {
-            'arcoblue-5': '#ff0000',
-            'arcoblue-6': '#ff0000',
-          },
-          javascriptEnabled: true,
-        },
-      },
-    },
     plugins: [
       eslint({ cache: false }),
       svgLoader(),

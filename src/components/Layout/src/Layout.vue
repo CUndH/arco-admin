@@ -1,10 +1,34 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useRouteStore } from '@/store/modules/route';
+import Header from '../components/Header.vue';
 
 const collapsed = ref(false);
 
 function onCollapse(val: boolean) {
   collapsed.value = val;
+}
+
+const routeStore = useRouteStore();
+
+const menus = ref();
+
+function genMenu() {
+  routeStore.generateRoutes().then((res) => {
+    menus.value = res;
+  });
+}
+
+onMounted(() => {
+  genMenu();
+});
+
+const router = useRouter();
+
+// eslint-disable-next-line no-undef
+function handleRoutePush(routeItem: IRouteRecordRaw) {
+  router.push({ path: routeItem.path });
 }
 </script>
 
@@ -14,26 +38,27 @@ function onCollapse(val: boolean) {
       breakpoint="lg"
       :width="220"
       collapsible
+      auto-open-selected
       :collapsed="collapsed"
       @collapse="onCollapse"
     >
-      <div class="logo" />
+      <div class="logo">Logo</div>
       <a-menu>
-        <a-menu-item>123</a-menu-item>
-        <a-sub-menu>
-          <a-menu-item>456</a-menu-item>
-          <a-menu-item>789</a-menu-item>
+        <a-sub-menu v-for="item in menus" :key="item.name">
+          <template #title>{{ item.meta.title }}</template>
+          <a-menu-item
+            v-for="child in item.children"
+            :key="child.name"
+            @click="handleRoutePush(child)"
+          >
+            {{ child.meta.title }}
+          </a-menu-item>
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header> Header </a-layout-header>
       <a-layout class="px-[24px]">
-        <a-breadcrumb class="my-[16px]">
-          <a-breadcrumb-item>Home</a-breadcrumb-item>
-          <a-breadcrumb-item>List</a-breadcrumb-item>
-          <a-breadcrumb-item>App</a-breadcrumb-item>
-        </a-breadcrumb>
+        <Header />
         <a-layout-content>
           <router-view />
         </a-layout-content>
@@ -48,5 +73,11 @@ function onCollapse(val: boolean) {
   height: 100vh;
   box-sizing: border-box;
   background-color: var(--color-bg-1);
+
+  .logo {
+    margin: 15px 0;
+    text-align: center;
+    font-size: 26px;
+  }
 }
 </style>

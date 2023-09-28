@@ -1,17 +1,23 @@
 import { App } from 'vue';
-import { createRouter, createWebHistory } from 'vue-router';
+import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 
 const Layout = () => import('@/components/Layout/src/Layout.vue');
 
-const routes = [
+export const constantRoutes: IRouteRecordRaw[] = [
   {
     path: '/test',
     name: 'Test',
     component: Layout,
+    meta: {
+      title: '测试',
+    },
     children: [
       {
         path: 'abc',
         name: 'TestPage',
+        meta: {
+          title: '测试111',
+        },
         component: () => import('@/views/test.vue'),
       },
     ],
@@ -20,7 +26,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes: constantRoutes as RouteRecordRaw[],
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 
