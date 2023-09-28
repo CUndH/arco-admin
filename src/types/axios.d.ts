@@ -23,3 +23,12 @@ declare interface IResponse<T = any> {
 }
 
 declare type IResPromise<T = any> = Promise<IResponse<T>>
+
+declare interface IResList<T = any> {
+  // current 和 page 都代表页数，兼容不同后端返回
+  current?: number
+  page?: number
+  size: number
+  total: number
+  records: T[]
+}

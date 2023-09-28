@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import eslint from 'vite-plugin-eslint';
 import svgLoader from 'vite-svg-loader';
 import { resolve } from 'path';
@@ -13,6 +14,7 @@ export default ({ mode }) => {
       eslint({ cache: false }),
       svgLoader(),
       vue(),
+      vueJsx(),
     ],
     resolve: {
       alias: {

@@ -26,7 +26,6 @@ onMounted(() => {
 
 const router = useRouter();
 
-// eslint-disable-next-line no-undef
 function handleRoutePush(routeItem: IRouteRecordRaw) {
   router.push({ path: routeItem.path });
 }

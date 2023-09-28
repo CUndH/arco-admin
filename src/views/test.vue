@@ -1,12 +1,40 @@
+<script setup lang="ts">
+import { Table, useTable } from '@/components/Table';
+import { getMenuList } from '@/api/Index';
+import { onMounted } from 'vue';
+
+const [register, { getList, getListByParams }] = useTable({
+  getListApi: getMenuList,
+});
+
+onMounted(() => {
+  getListByParams({ a: 'asd' });
+});
+</script>
+
 <template>
-  <div>123123</div>
-  <div class="mt-10">
-    <a-button type="primary"> Primary </a-button>
-  </div>
+  <Table
+    :columns="[
+      {
+        title: 'Name',
+        dataIndex: 'name',
+      },
+      {
+        title: 'Salary',
+        dataIndex: 'salary',
+      },
+      {
+        title: 'Address',
+        dataIndex: 'address',
+      },
+      {
+        title: 'Email',
+        dataIndex: 'email',
+      },
+    ]"
+    @register="register"
+  />
+  <div />
 </template>
 
-<style lang="scss" scoped>
-div {
-  color: red;
-}
-</style>
+<style lang="scss" scoped></style>
