@@ -29,3 +29,6 @@ dist-ssr
 *.local
 !.env.sample
 .stylelintcache
+
+# lock
+yarn.lock

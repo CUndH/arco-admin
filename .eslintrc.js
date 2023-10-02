@@ -10,6 +10,7 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'plugin:tailwindcss/recommended',
     'plugin:@typescript-eslint/recommended',
+    '@vue/eslint-config-prettier/skip-formatting',
   ],
   parser: 'vue-eslint-parser',
   parserOptions: {
@@ -52,11 +53,14 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': [0, { 'packageDir ': './src/' }],
-    'max-len': ['error', {
-      code: 160,
-      ignorePattern: 'class="([\\s\\S]*?)"|d="([\\s\\S]*?)"', // ignore classes or svg draw attributes
-      ignoreUrls: true,
-    }],
+    'max-len': [
+      'error',
+      {
+        code: 160,
+        ignorePattern: 'class="([\\s\\S]*?)"|d="([\\s\\S]*?)"', // ignore classes or svg draw attributes
+        ignoreUrls: true,
+      },
+    ],
     'tailwindcss/no-custom-classname': 'off',
     'vue/multi-word-component-names': 'off',
     'vue/max-attributes-per-line': 'off',

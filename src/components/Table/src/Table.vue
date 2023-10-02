@@ -1,4 +1,3 @@
-<!-- eslint-disable object-curly-newline -->
 <script lang="ts">
 import { PropType, computed, defineComponent, onMounted, ref, unref } from 'vue';
 import { TableColumnData } from '@arco-design/web-vue';
@@ -30,7 +29,9 @@ export default defineComponent({
 
     const { getPaginationRef, setPagination } = usePagination(getProps);
 
-    const { fetchList, fetchListByParams, getListDataRef } = useData(getProps, { getPaginationRef });
+    const { fetchList, fetchListByParams, getListDataRef } = useData(getProps, {
+      getPaginationRef,
+    });
 
     function handlePageChange(current: number) {
       setPagination({ current });
