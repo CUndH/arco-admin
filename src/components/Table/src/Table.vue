@@ -82,5 +82,9 @@ export default defineComponent({
     v-bind="getBindValue"
     @page-change="handlePageChange"
     @page-size-change="handlePageSizeChange"
-  />
+  >
+    <template v-for="item in Object.keys($slots)" #[item]="data" :key="item">
+      <slot :name="item" v-bind="data"></slot>
+    </template>
+  </a-table>
 </template>
