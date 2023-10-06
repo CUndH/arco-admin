@@ -32,3 +32,10 @@ declare interface IResList<T = any> {
   total: number
   records: T[]
 }
+
+declare interface PaginationProps {
+  current?: number;
+  page?: number;
+  size?: number;
+  [key: string]: any;
+}

@@ -3,6 +3,7 @@ import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
 
 const Layout = () => import('@/components/Layout/src/Layout.vue');
 
+// todo 后期移植到 asyncRoutes 中，模拟动态路由，现在放在这里方便测试
 export const constantRoutes: IRouteRecordRaw[] = [
   {
     path: '/test',
@@ -19,6 +20,24 @@ export const constantRoutes: IRouteRecordRaw[] = [
           title: '测试111',
         },
         component: () => import('@/views/test.vue'),
+      },
+    ],
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: Layout,
+    meta: {
+      title: '用户管理',
+    },
+    children: [
+      {
+        path: 'users',
+        name: 'UserList',
+        meta: {
+          title: '用户列表',
+        },
+        component: () => import('@/views/User/Index.vue'),
       },
     ],
   },
