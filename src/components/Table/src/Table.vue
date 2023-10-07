@@ -12,14 +12,12 @@ export default defineComponent({
       type: Array as PropType<TableColumnData[]>,
       required: true,
     },
-    loading: {
-      type: Boolean,
-      default: false,
-    },
   },
   emits: ['register'],
   setup(props, { attrs, emit }) {
-    const innerPropsRef = ref<BasicTableProps>();
+    const innerPropsRef = ref<BasicTableProps>({
+      loading: false
+    });
 
     const getProps = computed(() => ({ ...props, ...unref(innerPropsRef) }) as BasicTableProps);
 
@@ -27,10 +25,15 @@ export default defineComponent({
       innerPropsRef.value = { ...unref(innerPropsRef), ...basicProps };
     }
 
+    function setLoading(loading: boolean) {
+      innerPropsRef.value.loading = loading;
+    }
+
     const { getPaginationRef, setPagination } = usePagination(getProps);
 
     const { fetchList, fetchListByParams, getListDataRef } = useData(getProps, {
       getPaginationRef,
+      setLoading
     });
 
     function handlePageChange(current: number) {
@@ -49,6 +52,7 @@ export default defineComponent({
         ...props,
         pagination: unref(getPaginationRef),
         data: unref(getListDataRef),
+        loading: unref(innerPropsRef).loading
       };
 
       return bindValue;

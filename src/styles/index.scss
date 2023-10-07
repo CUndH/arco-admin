@@ -1,8 +1,7 @@
-body {
-  margin: 0;
-}
+@import './base';
 
 body {
   --color-menu-light-bg: #f2fcfc;
-  --color-fill-2: #BDF1F6;
+
+  margin: 0;
 }

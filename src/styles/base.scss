@@ -1,0 +1,20 @@
+.table-tools {
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 8px 0;
+
+  .tools-item + .tools-item {
+    margin-left: 12px;
+  }
+
+  .tools-item {
+    .arco-input-wrapper,
+    .arco-select-view-single {
+      width: 220px;
+    }
+
+    &-label {
+      display: inline-block;
+    }
+  }
+}

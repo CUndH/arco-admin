@@ -5,7 +5,8 @@ import { PaginationProps } from '@arco-design/web-vue';
 import { BasicTableProps } from '../types';
 
 interface ActionType {
-  getPaginationRef: ComputedRef<PaginationProps>
+  getPaginationRef: ComputedRef<PaginationProps>,
+  setLoading: (loading: boolean) => void
 }
 
 export function useData(props: ComputedRef<BasicTableProps>, otherProps: ActionType) {
@@ -19,6 +20,7 @@ export function useData(props: ComputedRef<BasicTableProps>, otherProps: ActionT
     if (cb) {
       cb(res.data);
     }
+    otherProps.setLoading(false);
   }
 
   function getParams(withParams?: boolean, paramsObj?: any) {
@@ -40,12 +42,14 @@ export function useData(props: ComputedRef<BasicTableProps>, otherProps: ActionT
   async function fetchList() {
     const fetch = unref(props).getListApi(getParams());
 
+    otherProps.setLoading(true);
     return fetch.then(fetchListCallback);
   }
 
   async function fetchListByParams(params: any) {
     const fetch = unref(props).getListApi(getParams(true, params));
 
+    otherProps.setLoading(true);
     return fetch.then(fetchListCallback);
   }
 

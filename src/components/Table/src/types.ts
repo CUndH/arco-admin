@@ -2,6 +2,7 @@ import { PaginationProps } from '@arco-design/web-vue';
 import { Table } from '..';
 
 export interface BasicTableProps {
+  loading?: boolean;
   getListApi: (params?: any) => Promise<IResponse<IResList<any>>>;
   getListCallBack?: (res: any) => any;
   pagination?: Partial<PaginationProps>;
