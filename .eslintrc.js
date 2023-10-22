@@ -67,6 +67,7 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'no-param-reassign': 'off',
+    'default-param-last': 'off'
   },
   settings: {
     'import/resolver': {
